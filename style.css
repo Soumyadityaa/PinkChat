@@ -165,6 +165,17 @@ html, body {
     border: 1px solid #2ecc71;
 }
 
+/* Unread Message Indicator Dot */
+.unread-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: var(--accent-primary);
+    margin-left: auto;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px var(--accent-primary);
+}
+
 /* Main Messenger Layout */
 .messenger-layout {
     position: fixed;
