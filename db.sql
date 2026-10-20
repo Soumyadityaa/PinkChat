@@ -18,3 +18,5 @@ CREATE TABLE messages (
     FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
     INDEX idx_conversation (sender_id, receiver_id, created_at)
 );
+
+ALTER TABLE messages ADD COLUMN is_read TINYINT(1) NOT NULL DEFAULT 0;
