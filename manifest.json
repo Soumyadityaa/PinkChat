@@ -1,0 +1,19 @@
+{
+    "name": "PinkChat Private Messenger",
+    "short_name": "PinkChat",
+    "description": "Private 1-on-1 Messenger Chat Application",
+    "start_url": "./index.php",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#fff5f8",
+    "theme_color": "#ec407a",
+    "icons": [
+        {
+            "src": "icon.svg",
+            "sizes": "192x192 512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
