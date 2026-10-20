@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Register PWA Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch((err) => {
+            console.error('Service Worker registration failed:', err);
+        });
+    }
+
     const layout = document.getElementById('messengerLayout');
     const sidebar = document.getElementById('sidebar');
     const chatArea = document.getElementById('chatArea');
@@ -67,8 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Mobile Navigation Toggle
     backToUsersBtn.addEventListener('click', () => {
         layout.classList.remove('chat-active');
+        selectedUserId = null;
         messageInput.blur();
         updateViewportBounds();
+        loadUsers();
     });
 
     // 3. Fetch & Render User List
@@ -102,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.dataset.id = user.id;
 
             const isOnline = user.status === 'online';
+            const hasUnread = Number(user.unread_count) > 0 && Number(user.id) !== selectedUserId;
 
             item.innerHTML = `
                 <div class="avatar">
@@ -115,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="user-name"></span>
                     <span class="user-status-label">${isOnline ? 'Online' : 'Offline'}</span>
                 </div>
+                ${hasUnread ? '<span class="unread-dot" title="Unread message"></span>' : ''}
             `;
             item.querySelector('.user-name').textContent = user.username;
 
@@ -132,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Select User & Open Conversation
     function selectUser(user) {
         selectedUserId = Number(user.id);
+        user.unread_count = 0;
         lastRenderedMessageCount = 0;
         lastMessageId = 0;
 
