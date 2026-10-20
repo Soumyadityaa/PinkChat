@@ -18,6 +18,14 @@ if ($receiver_id <= 0) {
     exit;
 }
 
+// Mark incoming unread messages from this chat partner as read
+try {
+    $markRead = $pdo->prepare("UPDATE messages SET is_read = 1 WHERE sender_id = ? AND receiver_id = ? AND is_read = 0");
+    $markRead->execute([$receiver_id, $current_user]);
+} catch (PDOException $e) {
+    // Ignore if column is being initialized
+}
+
 $sql = "SELECT id, sender_id, receiver_id, message_text, created_at 
         FROM messages 
         WHERE (sender_id = :u1 AND receiver_id = :r1) 
