@@ -588,3 +588,40 @@ html, body {
         max-width: 82%;
     }
 }
+
+
+/* Password Visibility Toggle */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 2.8rem; /* Creates empty space inside the box for the icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%); /* Perfectly centers the icon vertically */
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password:hover {
+    color: var(--accent-primary);
+}
+
+.toggle-password svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
